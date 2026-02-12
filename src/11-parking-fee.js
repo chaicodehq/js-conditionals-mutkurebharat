@@ -33,5 +33,49 @@
  * @returns {number} Parking fee or -1 for invalid input
  */
 export function calculateParkingFee(hours, vehicleType) {
-  // Your code here
+  let roundUpHours = Math.ceil(hours);
+  let vehicleArr = ["car", "motorcycle", "bus"];
+  if (roundUpHours <= 0 || !vehicleArr.includes(vehicleType)) {
+    return -1;
+  }
+
+  let perHourPrice;
+  let laterHourPrice;
+  let maxParkingPrice;
+  let parkingPrice;
+  if (vehicleType === "car") {
+    perHourPrice = 5;
+    laterHourPrice = 3;
+    maxParkingPrice = 30;
+    if (roundUpHours > 1) {
+      let carParkingPrice = perHourPrice + (roundUpHours - 1) * laterHourPrice;
+      parkingPrice =
+        carParkingPrice < maxParkingPrice ? carParkingPrice : maxParkingPrice;
+    } else {
+      parkingPrice = perHourPrice;
+    }
+  } else if (vehicleType === "motorcycle") {
+    perHourPrice = 3;
+    laterHourPrice = 2;
+    maxParkingPrice = 18;
+    if (roundUpHours > 1) {
+      let carParkingPrice = perHourPrice + (roundUpHours - 1) * laterHourPrice;
+      parkingPrice =
+        carParkingPrice < maxParkingPrice ? carParkingPrice : maxParkingPrice;
+    } else {
+      parkingPrice = perHourPrice;
+    }
+  } else if (vehicleType === "bus") {
+    perHourPrice = 10;
+    laterHourPrice = 7;
+    maxParkingPrice = 60;
+    if (roundUpHours > 1) {
+      let carParkingPrice = perHourPrice + (roundUpHours - 1) * laterHourPrice;
+      parkingPrice =
+        carParkingPrice < maxParkingPrice ? carParkingPrice : maxParkingPrice;
+    } else {
+      parkingPrice = perHourPrice;
+    }
+  }
+  return parkingPrice;
 }
